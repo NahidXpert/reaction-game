@@ -1,0 +1,52 @@
+:root {
+  --bg: #0F172A; --surface: #1E293B; --text: #F1F5F9; --muted: #94A3B8;
+  --accent: #6366F1;
+  --wait: #DC2626;  --on-wait: #FFFFFF;   /* 4.8:1 */
+  --go: #22C55E;    --on-go: #0F172A;     /* 7.6:1 */
+  --early: #F59E0B; --on-early: #0F172A;  /* 8.3:1 */
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", var(--font-body);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 1rem/1.5 var(--font-body); }
+h1, .pad__title, .pad__time, dd { font-family: var(--font-display); }
+.app { max-width: 42rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; display: grid; gap: 1.25rem; }
+h1 { margin: 0 0 .25rem; font-size: 1.75rem; font-weight: 700; }
+header p { margin: 0; color: var(--muted); }
+
+.pad {
+  display: grid; place-content: center; justify-items: center; gap: .5rem;
+  min-height: 55vh; width: 100%; padding: 1.5rem; border: 0; border-radius: 1rem;
+  background: var(--surface); color: var(--text); font: inherit; text-align: center;
+  cursor: pointer; user-select: none; touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+/* No transition on the pad: a fade would blur the exact moment of the go signal. */
+.pad[data-state="waiting"]   { background: var(--wait);  color: var(--on-wait); }
+.pad[data-state="ready"]     { background: var(--go);    color: var(--on-go); }
+.pad[data-state="too-early"] { background: var(--early); color: var(--on-early); }
+.pad__icon  { font-size: 2.5rem; line-height: 1; }
+.pad__title { font-size: clamp(1.5rem, 6vw, 2.25rem); font-weight: 700; }
+.pad__time  { font-size: clamp(3rem, 16vw, 6rem); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+.pad__time:empty { display: none; }
+.pad__hint  { font-weight: 500; opacity: .9; }
+.pad[data-state="idle"] .pad__hint,
+.pad[data-state="result"] .pad__hint,
+.pad[data-state="complete"] .pad__hint { color: var(--muted); opacity: 1; }
+.pad[data-pop="true"] .pad__time { animation: pop .25s ease-out; }
+@keyframes pop { from { transform: scale(.9); } to { transform: scale(1); } }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.stats { background: var(--surface); border-radius: 1rem; padding: 1rem 1.25rem; }
+dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: 1rem; margin: 0; }
+dt { color: var(--muted); font-size: .875rem; }
+dd { margin: 0; font-size: 1.5rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+dd.is-new { color: #A5B4FC; }
+.rounds { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+.rounds li { flex: 1 1 4.5rem; padding: .4rem .6rem; border-radius: .5rem; background: var(--bg);
+  color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; text-align: center; }
+.rounds li.is-done { color: var(--text); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { .pad[data-pop="true"] .pad__time { animation: none; } }
