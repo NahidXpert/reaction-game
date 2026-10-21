@@ -4,7 +4,6 @@ A dependency-free, accessible reaction-time game with a tested state machine and
 
 ![Screenshot or GIF](docs/screenshot.gif)
 
-**Live demo:** https://YOUR-USERNAME.github.io/reaction-timer/
 
 ## Features
 - Random 1–5 s delay, then a full-screen go signal; time shown in ms
