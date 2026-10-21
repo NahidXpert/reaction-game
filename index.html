@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reaction Timer</title>
+  <meta name="description" content="Test your reaction time in milliseconds. Best of five.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Reaction Timer</h1>
+      <p id="intro">Wait for the screen to turn green, then click, tap, or press Space as fast as you can. Five rounds per series.</p>
+    </header>
+
+    <button id="pad" class="pad" type="button" data-state="idle" aria-describedby="intro">
+      <span id="icon" class="pad__icon" aria-hidden="true"></span>
+      <span id="title" class="pad__title"></span>
+      <span id="time" class="pad__time"></span>
+      <span id="hint" class="pad__hint"></span>
+    </button>
+
+    <section class="stats" aria-label="Your stats">
+      <dl>
+        <div><dt>Personal best</dt><dd id="best">–</dd></div>
+        <div><dt>Best average</dt><dd id="best-avg">–</dd></div>
+        <div><dt>This series</dt><dd id="series-avg">–</dd></div>
+      </dl>
+      <ol id="rounds" class="rounds" aria-label="Rounds in this series"></ol>
+    </section>
+
+    <p id="live" class="sr-only" role="status" aria-live="polite"></p>
+  </main>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
